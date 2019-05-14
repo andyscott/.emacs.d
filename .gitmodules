@@ -1,0 +1,3 @@
+[submodule "bazel-workspace"]
+	path = bazel-workspace
+	url = https://github.com/andyscott/emacs-bazel-workspace

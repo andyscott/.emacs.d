@@ -1,0 +1,10 @@
+*~
+.DS_Store
+/.lsp-*
+/custom.el
+/elpa
+/ido.last
+/smex-items
+/transient
+/url
+/vendor
