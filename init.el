@@ -1,6 +1,6 @@
 ;;; init.el --- Andy's configuration file
 
-(setq debug-on-error t)
+;;(setq debug-on-error t)
 
 (if (version< emacs-version "23.0")
     (error "Old ass Emacs isn't supported"))
@@ -24,6 +24,9 @@
              '("melpa-stable" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+;; TODO FRING STUFF
+;;("<left>" fringe-mode '(6 . 6))
+
 (defun ensure-packages (&rest packages)
     ; (package-refresh-contents)
     (mapc '(lambda (package)
@@ -45,6 +48,7 @@
     'evil
     'exec-path-from-shell
     'expand-region
+    ;'fill-column-indicator
     'fireplace
     'flycheck
     'haskell-mode
@@ -55,8 +59,8 @@
     'magit
     'multi-term
     'nix-mode
+    'origami
     'outshine
-    'python-mode
     'sbt-mode
     'scala-mode
     'smex
@@ -64,6 +68,16 @@
     'use-package
     'yaml-mode
     )
+
+(use-package python
+  :init
+  (setq python-shell-interpreter "python"))
+
+(use-package origami)
+
+(use-package magit
+  :config
+  (global-set-key (kbd "C-c g") 'magit-status))
 
 (use-package yaml-mode)
 
@@ -89,6 +103,20 @@
   (set-frame-font "Operator Mono"))
 (blink-cursor-mode 1)
 (setq-default cursor-type 'bar)
+(setq-default show-trailing-whitespace t)
+(defun grayson/disable-show-trailing-whitespace ()
+  "Disable `show-trailing-whitespace' in selected modes."
+  (when (derived-mode-p
+	 'compilation-mode
+	 'shell-mode
+	 'term-mode
+	 )
+    (setq show-trailing-whitespace nil)))
+
+(add-hook 'after-change-major-mode-hook
+	  'grayson/disable-show-trailing-whitespace)
+
+
 (use-package beacon
   :init
   (setq beacon-blink-when-focused 1)
