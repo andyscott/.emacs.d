@@ -6,7 +6,9 @@
     (error "Old ass Emacs isn't supported"))
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; Doesn't seem to play well with chunkwm
+;;(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-screen t)
